@@ -1,0 +1,99 @@
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+
+const ProgramadosView = () => {
+  const [isTaskCompleted, setTaskCompleted] = useState(false);
+
+  const toggleTask = () => {
+    setTaskCompleted(!isTaskCompleted);
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Image source={require('./assets/arrow-left.png')} style={styles.icon} />
+        <Text style={styles.title}>Programados</Text>
+        <Image source={require('./assets/ellipsis-circle.png')} style={styles.icon} />
+      </View>
+
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Tarefas Diárias</Text>
+        <Image source={require('./assets/chevron-down.png')} style={styles.icon} />
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.taskContainer} onPress={toggleTask}>
+        <Image
+          source={isTaskCompleted ? require('./assets/checkmark-circle-fill.png') : require('./assets/circle.png')}
+          style={[styles.taskIcon, { tintColor: isTaskCompleted ? 'green' : 'gray' }]}
+        />
+        <View style={styles.taskInfo}>
+          <Text style={styles.taskTitle}>Ir para a consulta</Text>
+          <Text style={styles.taskDate}>Amanhã, 10:30</Text>
+        </View>
+        <Image source={require('./assets/ellipsis.png')} style={styles.icon} />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f0f0f0', // cor de fundo da tela
+    padding: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333', // cor do texto
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    backgroundColor: '#e0e0e0', // cor do fundo do botão
+    borderRadius: 10,
+    marginVertical: 10,
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    color: '#333', // cor do texto
+  },
+  taskContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    backgroundColor: '#ffffff', // cor do fundo da tarefa
+    borderRadius: 19,
+    marginVertical: 10,
+    elevation: 2, // sombra para o Android
+  },
+  taskInfo: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  taskTitle: {
+    fontWeight: '500',
+    color: '#333', // cor do texto
+  },
+  taskDate: {
+    color: 'gray',
+  },
+  icon: {
+    width: 25,
+    height: 25,
+  },
+  taskIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 5,
+  },
+});
+
+export default ProgramadosView;
